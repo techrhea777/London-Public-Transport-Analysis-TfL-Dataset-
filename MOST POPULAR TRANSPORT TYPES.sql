@@ -1,0 +1,5 @@
+-- most_popular_transport_types
+SELECT JOURNEY_TYPE, SUM(JOURNEYS_MILLIONS) AS total_journeys_millions 
+FROM `big-query-tutorial-488409.TFL_JOURNEYS.TFL_JOURNEYS`
+GROUP BY JOURNEY_TYPE
+ORDER BY SUM(JOURNEYS_MILLIONS) DESC;
