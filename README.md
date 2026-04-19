@@ -1,81 +1,84 @@
 # London Public Transport Analysis (TfL Dataset)
 
 ## Project Overview
-This project explores public transport usage in London using data provided by Transport for London (TfL). London—home to over 8.5 million people and more than 300 spoken languages—relies on an extensive and efficient transport network.
+This project explores public transport usage in London using data from Transport for London (TfL). As one of the world’s largest and most diverse cities—with over 8.5 million residents and hundreds of languages spoken—London depends heavily on its extensive transport network.
 
-From iconic landmarks like Tower Bridge to its vast Underground system, London’s infrastructure has evolved far beyond its original horse-and-cart roadways. This project analyzes transport trends using SQL queries on a dataset stored in Google BigQuery.
+From the Underground to newer systems like the Emirates Airline cable car, the city’s infrastructure plays a critical role in daily life. This project uses SQL to analyze transport trends and identify patterns in how people move across London over time.
 
+## Dataset
 
----
-
-## Dataset Description
+The data is stored in a BigQuery database.
 
 **Database:** `TFL`  
 **Table:** `JOURNEYS`
 
-| Column | Description | Data Type |
-|--------|-------------|----------|
-| `MONTH` | Month number (1 = January) | INTEGER |
-| `YEAR` | Year | INTEGER |
-| `DAYS` | Number of days in the month | INTEGER |
-| `REPORT_DATE` | Date reported | DATE |
-| `JOURNEY_TYPE` | Mode of transport | VARCHAR |
-| `JOURNEYS_MILLIONS` | Number of journeys (millions) | FLOAT |
+### Columns
 
----
+- `MONTH` – Month number (1 = January)  
+- `YEAR` – Year  
+- `DAYS` – Number of days in the month  
+- `REPORT_DATE` – Date reported  
+- `JOURNEY_TYPE` – Mode of transport  
+- `JOURNEYS_MILLIONS` – Number of journeys (in millions)  
 
-## Objectives
+## Skills Practiced
+This project focuses on essential SQL skills, including:
+- Aggregating data using functions like `SUM()`
+- Grouping data with `GROUP BY`
+- Filtering rows using `WHERE`
+- Sorting results with `ORDER BY`
+- Analyzing time-based trends
+- Working with real-world datasets
 
-Using SQL, this project answers three key questions:
+## Project Tasks
 
-1) What are the most popular transport types by total journeys?
-2) Which five months and years were most popular for the Emirates Airline?
-3) Which five years had the lowest Underground & DLR journey volumes?
+### 1. Most popular transport types
+Determine which transport methods are used the most overall.
 
----
+Requirements:
+- Use the `JOURNEYS` table
+- Calculate total journeys for each `JOURNEY_TYPE`
+- Return:
+  - `JOURNEY_TYPE`
+  - total journeys
+- Sort results in descending order of total journeys
+- Save the output as `most_popular_transport_types`
 
-## SQL Queries & Insights
+### 2. Least popular years for Underground & DLR
+Identify the years with the lowest total usage of the Underground & DLR.
 
-### 1. Most Popular Transport Types
+Requirements:
+- Filter for `JOURNEY_TYPE = 'Underground & DLR'`
+- Aggregate total journeys by year
+- Return:
+  - `year`
+  - `JOURNEY_TYPE`
+  - total journeys
+- Sort results in ascending order
+- Limit to the lowest 5 years
+- Save the output as `least_popular_years_tube`
 
-```sql
--- most_popular_transport_types
-SELECT JOURNEY_TYPE, SUM(JOURNEYS_MILLIONS) AS total_journeys_millions 
-FROM `big-query-tutorial-488409.TFL_JOURNEYS.TFL_JOURNEYS`
-GROUP BY JOURNEY_TYPE
-ORDER BY SUM(JOURNEYS_MILLIONS) DESC;
+### 3. Most popular months for Emirates Airline
+Find the months and years when the Emirates Airline had the highest usage.
 
-Insight: Identifies which transport methods dominate overall usage in London.
+Requirements:
+- Filter for `JOURNEY_TYPE = 'Emirates Airline'`
+- Exclude missing journey values
+- Return:
+  - `month`
+  - `year`
+  - journey volume (rounded to 2 decimal places)
+- Sort by journey volume (highest first), then by year
+- Limit to the top 5 results
+- Save the output as `emirates_airline_popularity`
 
-2. Least Popular Years for the Tube
--- least_popular_years_tube
-SELECT year, JOURNEY_TYPE, SUM(JOURNEYS_MILLIONS) AS total_journeys_millions
-FROM `big-query-tutorial-488409.TFL_JOURNEYS.TFL_JOURNEYS`
-WHERE JOURNEY_TYPE = 'Underground & DLR'
-GROUP BY year, JOURNEY_TYPE
-ORDER BY total_journeys_millions ASC
-LIMIT 5;
-Insight: Highlights years with the lowest Underground usage, potentially due to major events or disruptions.
+## Important Instructions
+- Use the exact output names:
+  - `most_popular_transport_types`
+  - `least_popular_years_tube`
+  - `emirates_airline_popularity`
+- Do not rename outputs accidentally by creating extra cells
+- Ensure results follow sorting and filtering requirements exactly
 
-3. Emirates Airline Popularity Over Time
--- emirates_airline_popularity
-SELECT month, year, ROUND(JOURNEYS_MILLIONS, 2) AS rounded_journeys_millions FROM `big-query-tutorial-488409.TFL_JOURNEYS.TFL_JOURNEYS`
-WHERE JOURNEY_TYPE = 'Emirates Airline' AND JOURNEYS_MILLIONS IS NOT NULL
-GROUP BY month, year, ROUND(JOURNEYS_MILLIONS, 2)
-ORDER BY rounded_journeys_millions DESC, year 
-LIMIT 5;
-Insight: Tracks usage trends of the Emirates Airline cable car across different months and years.
-
-Key Learnings
-Aggregating data using SUM() and GROUP BY
-Filtering results with WHERE
-Sorting outputs using ORDER BY
-Analyzing real-world transport trends with SQL
-How to Use
-Upload the dataset to Google BigQuery under the dataset name TFL.
-Ensure the table is named JOURNEYS (case-sensitive).
-Run the provided SQL queries.
-Review and interpret the results.
-Conclusion
-
-London’s transport system is one of the most complex in the world. By analyzing journey data, this project provides insights into how millions of people travel across the city and how those patterns evolve over time.
+## Goal
+The aim of this project is to better understand how London’s public transport system is used over time. By analyzing journey volumes across different transport types and time periods, you can uncover patterns in commuter behavior and identify trends in urban mobility.
