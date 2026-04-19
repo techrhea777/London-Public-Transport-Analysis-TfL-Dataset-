@@ -5,6 +5,10 @@ This project explores public transport usage in London using data provided by Tr
 
 From iconic landmarks like Tower Bridge to its vast Underground system, Londonâ€™s infrastructure has evolved far beyond its original horse-and-cart roadways. This project analyzes transport trends using SQL queries on a dataset stored in Google BigQuery.
 
+blob:https://www.datacamp.com/11bd5f94-b5b5-4e3b-a10c-28e1d9fcce71
+
+blob:https://www.datacamp.com/2d138a2b-4458-4f1a-b36c-dc12d9c9a8fd
+
 ---
 
 ## Dataset Description
@@ -27,9 +31,9 @@ From iconic landmarks like Tower Bridge to its vast Underground system, Londonâ€
 
 Using SQL, this project answers three key questions:
 
-1. What are the most popular transport types?
-2. Which years had the lowest Underground (Tube) usage?
-3. How popular is the Emirates Airline cable car over time?
+1) What are the most popular transport types by total journeys?
+2) Which five months and years were most popular for the Emirates Airline?
+3) Which five years had the lowest Underground & DLR journey volumes?
 
 ---
 
