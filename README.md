@@ -5,9 +5,6 @@ This project explores public transport usage in London using data provided by Tr
 
 From iconic landmarks like Tower Bridge to its vast Underground system, London’s infrastructure has evolved far beyond its original horse-and-cart roadways. This project analyzes transport trends using SQL queries on a dataset stored in Google BigQuery.
 
-blob:https://www.datacamp.com/11bd5f94-b5b5-4e3b-a10c-28e1d9fcce71
-
-blob:https://www.datacamp.com/2d138a2b-4458-4f1a-b36c-dc12d9c9a8fd
 
 ---
 
